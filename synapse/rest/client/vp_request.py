@@ -48,9 +48,11 @@ class HandleVpRequest(RestServlet):
 
         input_descriptors, requirements = make_required_descriptors(vp_type)
 
+        base_url = self.hs.config.server.public_baseurl
+
         payload = {
             ### WIP
-            "client_id": "https://ownd-project.com:8008/",
+            "client_id": base_url,
 
             "client_id_scheme": "x509_san_dns",
             "response_uri": client_id,

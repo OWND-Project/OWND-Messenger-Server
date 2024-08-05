@@ -282,9 +282,8 @@ class SIOPv2Handler:
                 ]
             )
 
-            # WIP ###########################################
-            expected_aud = "https://ownd-project.com:8008/"
-            #################################################
+            base_url = self.hs.config.server.public_baseurl
+            expected_aud = base_url
 
             logger.info("creation ok")
 
