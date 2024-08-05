@@ -42,7 +42,7 @@ class HandleVpInitiation(RestServlet):
             self.base_url, "/".join(["/_matrix/client/v3/vp_response", sid])
         )
         ### WIP
-        client_id = "https://ownd-project.com:8008/"
+        client_id = self.hs.config.server.public_baseurl
 
         request_uri = urllib.parse.urljoin(
             self.base_url, "/".join(["/_matrix/client/v3/vp_request", sid])

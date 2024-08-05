@@ -783,15 +783,14 @@ class AuthHandler:
             sid,
         )
 
+        base_url = self.hs.config.server.public_baseurl
+
         return {
             "client_metadata_uri": client_metadata_uri,
             "request_uri": request_uri,
             "redirect_uri": redirect_uri,
 
-            # "client_id": redirect_uri,
-            # WIP ########################################
-            "client_id": "https://ownd-project.com:8008/",
-            ##############################################
+            "client_id": base_url,
 
             "polling_uri": polling_uri,
         }

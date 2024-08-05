@@ -37,6 +37,7 @@ from typing import (
     Set,
 )
 from urllib.parse import urlencode
+from urllib.parse import urljoin
 
 import attr
 from typing_extensions import Protocol
@@ -235,6 +236,8 @@ class SsoHandler:
         self._identity_providers: Dict[str, SsoIdentityProvider] = {}
 
         self._consent_at_registration = hs.config.consent.user_consent_at_registration
+
+        self._public_baseurl = hs.config.server.public_baseurl
 
     def register_identity_provider(self, p: SsoIdentityProvider) -> None:
         p_id = p.idp_id
@@ -624,7 +627,9 @@ class SsoHandler:
         ):
             return b"/_synapse/client/new_user_consent"
         else:
-            return b"/_synapse/client/sso_register" if session else b""
+            base_path = "/_synapse/client/sso_register"
+            join = urljoin(self._public_baseurl, base_path).encode("ascii")
+            return join if session else b""
 
     async def _redirect_to_next_new_user_step(
         self,

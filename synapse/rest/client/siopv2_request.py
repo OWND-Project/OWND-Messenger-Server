@@ -49,13 +49,12 @@ class HandleSIOPv2Request(RestServlet):
 
         await self._ro_signer.setup_signing_key(self.ro_signing_kid)
 
+        base_url = self.hs.config.server.public_baseurl
+
         payload = {
             "iss": redirect_uri,
 
-            # "client_id": redirect_uri,
-            # WIP ######################
-            "client_id": "https://ownd-project.com:8008/",
-            ############################
+            "client_id": base_url,
 
             "redirect_uri": redirect_uri,
             "nonce": nonce,

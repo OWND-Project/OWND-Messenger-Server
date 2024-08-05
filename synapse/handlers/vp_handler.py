@@ -426,8 +426,9 @@ class VerifiablePresentationHandler:
         expected_aud = urllib.parse.urljoin(
             self.base_url, "/".join(["/_matrix/client/v3/vp_response", sid])
         )
-        ### WIP
-        expected_aud = "https://ownd-project.com:8008/"
+
+        base_url = self.hs.config.server.public_baseurl
+        expected_aud = base_url
 
         expected_nonce = await self._store.lookup_vp_ro_nonce(sid)
         raw_token_value = vp_token[0]
